@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let powerCalc = new Calculator;
+    powerCalc.addMethod("*", (a, b) => a * b);
+    powerCalc.addMethod("/", (a, b) => a / b);
+    powerCalc.addMethod("**", (a, b) => a ** b);
+
+    let result = powerCalc.calculate("2 ** 3");
+    alert(result); // 8
+
+    function Calculator() {
+      this.operatorsDic = {
+        '-': (a, b) => a - b,
+        '+': (a, b) => a + b
+      }
+
+      this.addMethod = function (oper, func) {
+        this.operatorsDic[oper] = func;
+      }
+
+      this._parseStr = function (str) {
+        const [a, oper, b] = str.split(' ');
+        this.a = +a;
+        this.b = +b;
+        this.oper = oper;
+      }
+
+      this.calculate = function (str) {
+        this._parseStr(str);
+        return this.operatorsDic[this.oper](this.a, this.b);
+      }
+    }
+  </script>
+</body>
+
+</html>
