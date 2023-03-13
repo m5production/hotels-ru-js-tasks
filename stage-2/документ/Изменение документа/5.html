@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="calendar"></div>
+
+  <script>
+    function createCalendar(elem, year, month) {
+      const currMonth = new Date(year, month);
+      const thead = makeThead();
+      elem.append(thead);
+
+      const firstDayNum = currMonth.getDay() === 0 ? 7 : currMonth.getDay();
+      const lastDayNum = new Date(year, month + 1, 0).getDate();
+      let date = 2 - firstDayNum;
+
+      while (date <= lastDayNum) {
+        const tr = document.createElement('tr');
+        
+        for (let i = 0; i < 7; i++) {
+          const td = document.createElement('td');
+          td.textContent = date <= 0 || date > lastDayNum ? '' : date;
+          tr.append(td);
+          date++;
+        }
+
+        elem.append(tr);
+      }
+    }
+
+    function makeThead() {
+      const thead = document.createElement('thead');
+      const weekDays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+
+      weekDays.forEach(day => {
+        const th = document.createElement('th');
+        th.scope = 'col';
+        th.innerText = day.toLowerCase();
+        thead.append(th);
+      })
+
+      return thead;
+    }
+
+    createCalendar(calendar, 2023, 2);
+  </script>
+
+</body>
+
+</html>

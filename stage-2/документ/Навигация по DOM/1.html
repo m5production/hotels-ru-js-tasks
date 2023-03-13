@@ -1,0 +1,15 @@
+<html>
+<body>
+  <div>Пользователи:</div>
+  <ul>
+    <li>Джон</li>
+    <li>Пит</li>
+  </ul>
+  <script>
+    const div = document.body.firstElementChild;
+    const ul = document.body.lastElementChild;
+    const liNodes = document.body.firstElementChild.nextElementSibling.children;
+    const pitLiNode = Array.from(liNodes).find(li => li.textContent === 'Пит')
+  </script>
+</body>
+</html>

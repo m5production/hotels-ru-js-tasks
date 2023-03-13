@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    .hours {
+      color: red;
+    }
+
+    .minutes {
+      color: green;
+    }
+
+    .seconds {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- клик по этой кнопке вызовет clockStart() -->
+  <input type="button" onclick="clockStart()" value="Старт">
+
+  <!-- клик по этой кнопке вызовет clockStop() -->
+  <input type="button" onclick="clockStop()" value="Стоп">
+
+  <script>
+    const clockContainer = document.createElement('div');
+    const hours = document.createElement('span');
+    hours.className = 'hours';
+    hours.textContent = 'hh';
+    const minutes = document.createElement('span');
+    minutes.className = 'minutes';
+    minutes.textContent = 'mm';
+    const seconds = document.createElement('span');
+    seconds.className = 'seconds';
+    seconds.textContent = 'ss';
+    clockContainer.append(hours, ':', minutes, ':', seconds);
+
+    document.body.prepend(clockContainer);
+    
+    let timer;
+
+    function clockStart() {
+      updClock();
+      timer = setInterval(updClock, 1000);
+    }
+
+    function clockStop(){
+      clearInterval(timer);
+    }
+
+    function updClock(){
+      const time = new Date();
+
+      const hours = document.querySelector('.hours');
+      hours.textContent = time.getHours().toString().padStart(2, 0);
+
+      const minutes = document.querySelector('.minutes');
+      minutes.textContent = time.getMinutes().toString().padStart(2, 0);
+
+      const seconds = document.querySelector('.seconds');
+      seconds.textContent = time.getSeconds().toString().padStart(2, 0);
+    }
+  </script>
+
+</body>
+
+</html>
